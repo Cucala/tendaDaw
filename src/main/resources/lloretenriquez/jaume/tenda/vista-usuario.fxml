@@ -2,7 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -10,10 +10,9 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@css/pongenereic.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lloretenriquez.jaume.tenda.controller.VistaUsuarioController">
    <children>
-      <ListView fx:id="listaUsuarios" layoutX="45.0" layoutY="76.0" prefHeight="200.0" prefWidth="200.0" />
       <Button layoutX="294.0" layoutY="317.0" mnemonicParsing="false" onAction="#clean" text="New" />
-      <Button layoutX="425.0" layoutY="317.0" mnemonicParsing="false" text="Delete" />
-      <Button layoutX="351.0" layoutY="317.0" mnemonicParsing="false" text="Modify" />
+      <Button layoutX="425.0" layoutY="317.0" mnemonicParsing="false" onAction="#deleteUser" text="Delete" />
+      <Button layoutX="357.0" layoutY="317.0" mnemonicParsing="false" onAction="#saveNewUser" text="Save" />
       <TextField fx:id="nameTextField" layoutX="249.0" layoutY="179.0" />
       <TextField fx:id="lastTextField" layoutX="415.0" layoutY="179.0" />
       <TextField fx:id="phoneTextField" layoutX="249.0" layoutY="245.0" />
@@ -44,5 +43,12 @@
             <Font size="35.0" />
          </font>
       </Text>
+      <TableView fx:id="tablaUsuarios" layoutX="8.0" layoutY="100.0" prefHeight="200.0" prefWidth="229.0" />
+      <TextField fx:id="usernameTextField" layoutX="251.0" layoutY="105.0" />
+      <Label layoutX="247.0" layoutY="55.0" text="UserName" textFill="#e6ff58">
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

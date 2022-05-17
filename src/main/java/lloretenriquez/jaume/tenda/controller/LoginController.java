@@ -13,5 +13,6 @@ public class LoginController {
     @FXML
     protected void login(){
         System.out.print(DDBB.login(userTextFill.getText(),passwordTextFill.getText()));
+
     }
 }

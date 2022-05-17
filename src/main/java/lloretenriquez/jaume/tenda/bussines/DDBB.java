@@ -77,4 +77,83 @@ public class DDBB {
         return null;
     }
 
+    public static void insertar(String username ,String name,
+                                String surname, String phone, String email){
+        try {
+            Class.forName("org.postgresql.Driver");
+            connection = DriverManager.getConnection(URL);
+            query = connection.createStatement();
+            String sql  = "INSERT INTO users (username, name, surname, phone, email, password) " +
+                    "VALUES ('" + username + "', '" + name + "', '" + surname +
+                    "', '" + phone + "', '" + email + "', " + "'e9b8f05816a9d5885af079d94b449167'" + ")" ;
+            ResultSet result = query.executeQuery(sql);
+            result.next();
+
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            System.err.println("No se han podido obtener datos");
+        } catch (ClassNotFoundException e) {
+            System.err.println("No se ha podido establecer la conexion");
+        }
+        finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                System.err.println("No se ha podido cerrar la conexion");
+            }
+        }
+    }
+
+    public static void actualizar(String username ,String name,
+                                String surname, String phone, String email, int id){
+        try {
+            Class.forName("org.postgresql.Driver");
+            connection = DriverManager.getConnection(URL);
+            query = connection.createStatement();
+            String sql  = "update users \n" +
+                    "set username = '"+ username + "',  name = '"+ name +"',\n" +
+                    "surname = '"+ surname +"', phone = "+ phone +", email = '"+ email +"'\n" +
+                    "where id = "+ id ;
+            ResultSet result = query.executeQuery(sql);
+            result.next();
+
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            System.err.println("No se han podido obtener datos");
+        } catch (ClassNotFoundException e) {
+            System.err.println("No se ha podido establecer la conexion");
+        }
+        finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                System.err.println("No se ha podido cerrar la conexion");
+            }
+        }
+    }
+
+    public static void delete(int id){
+        try {
+            Class.forName("org.postgresql.Driver");
+            connection = DriverManager.getConnection(URL);
+            query = connection.createStatement();
+            String sql  = "delete from users where id = "+ id ;
+            ResultSet result = query.executeQuery(sql);
+            result.next();
+
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            System.err.println("No se han podido obtener datos");
+        } catch (ClassNotFoundException e) {
+            System.err.println("No se ha podido establecer la conexion");
+        }
+        finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                System.err.println("No se ha podido cerrar la conexion");
+            }
+        }
+    }
+
 }
