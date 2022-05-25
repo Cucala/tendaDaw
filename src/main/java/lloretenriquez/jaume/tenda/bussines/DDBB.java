@@ -8,15 +8,45 @@ public class DDBB {
     private static Statement query;
     private static final String URL = "jdbc:postgresql://localhost:5432/tenda?user=postgres&password=1234";
 
-    public static boolean login(String user, String password){
+    public static int login(String user, String password){
         try {
             Class.forName("org.postgresql.Driver");
             connection = DriverManager.getConnection(URL);
             query = connection.createStatement();
-            String sql  = "SELECT id FROM users WHERE username = '"+user+"' AND password = '"+ password+"'";
+            String sql  = "SELECT id FROM users WHERE username = '"+user+"' AND password = '"+ password+"'" ;
             ResultSet result = query.executeQuery(sql);
             result.next();
-            return result.getInt(1) > 0 ? true : false;
+            int id = result.getInt(1);
+            return id;
+
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            System.err.println("No se han podido obtener datos");
+        } catch (ClassNotFoundException e) {
+            System.err.println("No se ha podido establecer la conexion");
+        }
+        finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                System.err.println("No se ha podido cerrar la conexion");
+            }
+        }
+        return 0;
+    }
+
+    public static boolean isValidated(int id){
+        try {
+            Class.forName("org.postgresql.Driver");
+            connection = DriverManager.getConnection(URL);
+            query = connection.createStatement();
+            String sql  = "SELECT password_validated FROM users WHERE id = "+id ;
+            ResultSet result = query.executeQuery(sql);
+            result.next();
+            boolean passwordValidated = result.getBoolean(1);
+            System.out.println(passwordValidated);
+            return passwordValidated;
+
 
         } catch (SQLException e) {
             System.err.println(e.getMessage());
@@ -154,6 +184,70 @@ public class DDBB {
                 System.err.println("No se ha podido cerrar la conexion");
             }
         }
+    }
+
+    public static void actualizarContrasenyaUsuarios(String password, int id) {
+        try {
+            Class.forName("org.postgresql.Driver");
+            connection = DriverManager.getConnection(URL);
+            query = connection.createStatement();
+            String sql  = "UPDATE users SET password = '" +password+ "', password_validated = true WHERE id = " +id;
+            ResultSet result = query.executeQuery(sql);
+
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            System.err.println("No se han podido obtener datos");
+        } catch (ClassNotFoundException e) {
+            System.err.println("No se ha podido establecer la conexion");
+        }
+        finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                System.err.println("No se ha podido cerrar la conexion");
+            }
+        }
+    }
+
+    public static ArrayList<ArrayList<String>> getProducts(){
+        try {
+            Class.forName("org.postgresql.Driver");
+            connection = DriverManager.getConnection(URL);
+            query = connection.createStatement();
+            String sql  = "SELECT * FROM products";
+            ResultSet result = query.executeQuery(sql);
+            ArrayList<ArrayList<String>> datos = new ArrayList<>();
+            while (result.next()) {
+                ArrayList<String> user = new ArrayList<>();
+                user.add(Integer.toString(result.getInt(1)));
+                user.add(result.getString(2));
+                user.add(result.getString(3));
+                user.add(result.getString(4));
+                user.add(Integer.toString(result.getInt(5)));
+                datos.add(user);
+            }
+            for (ArrayList<String> array : datos) {
+                for (String dato : array) {
+                    System.out.print(dato + " ");
+                }
+                System.out.println();
+            }
+            return datos;
+
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            System.err.println("No se han podido obtener datos");
+        } catch (ClassNotFoundException e) {
+            System.err.println("No se ha podido establecer la conexion");
+        }
+        finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                System.err.println("No se ha podido cerrar la conexion");
+            }
+        }
+        return null;
     }
 
 }

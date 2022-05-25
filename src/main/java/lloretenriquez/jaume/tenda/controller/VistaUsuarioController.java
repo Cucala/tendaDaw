@@ -16,6 +16,9 @@ import java.util.ArrayList;
 
 public class VistaUsuarioController{
     private ObservableList<UserModel> diccionarioUsuarios;
+
+    private int id;
+
     @FXML
     private TextField nameTextField;
     @FXML
@@ -28,6 +31,10 @@ public class VistaUsuarioController{
     private TextField usernameTextField;
     @FXML
     private TableView tablaUsuarios;
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public void initialize(){
         mostrarDatos();
