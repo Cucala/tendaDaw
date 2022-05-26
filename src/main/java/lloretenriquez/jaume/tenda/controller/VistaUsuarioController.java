@@ -3,14 +3,16 @@ package lloretenriquez.jaume.tenda.controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import lloretenriquez.jaume.tenda.HelloApplication;
 import lloretenriquez.jaume.tenda.bussines.DDBB;
 import lloretenriquez.jaume.tenda.model.UserModel;
 
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -31,6 +33,9 @@ public class VistaUsuarioController{
     private TextField usernameTextField;
     @FXML
     private TableView tablaUsuarios;
+
+    @FXML
+    private MenuItem goToTpv;
 
     public void setId(int id) {
         this.id = id;
@@ -132,5 +137,20 @@ public class VistaUsuarioController{
                 selectElement();
             }
         });
+    }
+
+    @FXML
+    protected void changeTpvView() throws IOException {
+        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("tpv-view.fxml"));
+
+        TpvController controller = new TpvController();
+
+        loader.setController(controller);
+
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        HelloApplication.window.setTitle("Rostidor De Javi - TPV");
+        HelloApplication.window.setScene(scene);
+        HelloApplication.window.show();
     }
 }
