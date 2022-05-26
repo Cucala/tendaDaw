@@ -1,0 +1,23 @@
+-- Table: public.products
+
+-- DROP TABLE IF EXISTS public.products;
+
+CREATE TABLE IF NOT EXISTS public.products
+(
+    id bigint NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1 ),
+    name character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    description text COLLATE pg_catalog."default",
+    image character varying(255) COLLATE pg_catalog."default",
+    price integer NOT NULL,
+    CONSTRAINT products_pkey PRIMARY KEY (id)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.products
+    OWNER to postgres;
+
+
+INSERT INTO public.products(
+	name, description, image, price)
+	VALUES ('Coca-cola', 'Beguda resfrescant', 'https://cdn-3.expansion.mx/dims4/default/a4dc17e/2147483647/strip/true/crop/2096x1430+0+0/resize/1200x819!/format/webp/quality/90/?url=https%3A%2F%2Fcdn-3.expansion.mx%2F95%2F6c%2F722abfb544dcb4a46b9ca967a1ef%2Fistock-499925476.jpg', 2.5);
