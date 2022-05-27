@@ -15,7 +15,7 @@ import lloretenriquez.jaume.tenda.bussines.DDBB;
 
 import java.util.ArrayList;
 
-public class TpvController {
+public class TpvController extends Controller{
     @FXML
     private VBox selectionArea;
 

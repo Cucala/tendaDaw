@@ -53,16 +53,16 @@ public class LoginController {
     @FXML
     private void changeToUsuarioView() throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("vista-usuario.fxml"));
+        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("mainView-view.fxml"));
+
         // Paso 2
-        VistaUsuarioController controller = new VistaUsuarioController();
-        controller.setId(id);
+        MainViewController controller = new MainViewController();
         // Paso 3
         loader.setController(controller);
         // Paso 4
         Parent root = loader.load();
         Scene scene = new Scene(root);
-        HelloApplication.window.setTitle("Rostidor De Javi");
+        HelloApplication.window.setTitle("Rostidor De Javi - Main View");
         HelloApplication.window.setScene(scene);
         HelloApplication.window.show();
 
