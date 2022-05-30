@@ -1,4 +1,6 @@
 package lloretenriquez.jaume.tenda.bussines;
+import lloretenriquez.jaume.tenda.model.ProveedorModel;
+
 import javax.xml.transform.Result;
 import java.sql.*;
 import java.util.ArrayList;
@@ -231,6 +233,60 @@ public class DDBB {
                     System.out.print(dato + " ");
                 }
                 System.out.println();
+            }
+            return datos;
+
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            System.err.println("No se han podido obtener datos");
+        } catch (ClassNotFoundException e) {
+            System.err.println("No se ha podido establecer la conexion");
+        }
+        finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                System.err.println("No se ha podido cerrar la conexion");
+            }
+        }
+        return null;
+    }
+
+    public static void deleteProveedor(int id){
+        try {
+            Class.forName("org.postgresql.Driver");
+            connection = DriverManager.getConnection(URL);
+            query = connection.createStatement();
+            String sql  = "delete from proveedor where id = "+ id ;
+            ResultSet result = query.executeQuery(sql);
+            result.next();
+
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            System.err.println("No se han podido obtener datos");
+        } catch (ClassNotFoundException e) {
+            System.err.println("No se ha podido establecer la conexion");
+        }
+        finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                System.err.println("No se ha podido cerrar la conexion");
+            }
+        }
+    }
+
+    public static ArrayList<ProveedorModel> getProveedor(){
+        try {
+            Class.forName("org.postgresql.Driver");
+            connection = DriverManager.getConnection(URL);
+            query = connection.createStatement();
+            String sql  = "SELECT * FROM proveedor";
+            ResultSet result = query.executeQuery(sql);
+            ArrayList<ProveedorModel> datos = new ArrayList<>();
+            while (result.next()) {
+                datos.add(new ProveedorModel(result.getString(3), result.getString(2),
+                        result.getInt(1)));
             }
             return datos;
 

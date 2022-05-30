@@ -42,6 +42,7 @@ public class TpvController extends Controller{
             }
 
             Image img = new Image("http://www.maestrosdelweb.com/images/2009/08/crayones_jpg.jpg");
+            //Image img = new Image("http://cdn-3.expansion.mx/dims4/default/a4dc17e/2147483647/strip/true/crop/2096x1430+0+0/resize/1200x819!/format/webp/quality/90/?url=https%3A%2F%2Fcdn-3.expansion.mx%2F95%2F6c%2F722abfb544dcb4a46b9ca967a1ef%2Fistock-499925476.jpg");
             System.out.println(products.get(i).get(3));
             ImageView imgView = new ImageView(img);
 
